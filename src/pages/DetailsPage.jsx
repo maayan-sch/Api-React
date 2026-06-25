@@ -2,7 +2,7 @@
 //import "../styles.css";
 import {useParams} from 'react-router-dom';
 
-export default function Details({apis, favorites, toggleFavorites}) {
+export default function DetailsPage({apis, favorites, toggleFavorites}) {
 const param = useParams();
 const id = parseInt(param.id);
 
