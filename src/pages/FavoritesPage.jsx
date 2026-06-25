@@ -1,11 +1,11 @@
 //import React from "react";
 //import "../styles.css";
-import Api from "./Api";
+import Api from '../components/Api';
 
-export default function Favorites({ favorites, apis, toggleFavorites }) {
+export default function FavoritesPage({ favorites, apis, toggleFavorites }) {
   return (
     <div>
-      <h1>Your Favorites Api's</h1>
+      <h2>Your Favorites Api's</h2>
       <div>
         {favorites.map((id) => {
           const api = apis.find((api) => api.id === id);

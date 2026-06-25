@@ -1,8 +1,8 @@
 //import React, { useState } from "react";
 //import "../styles.css";
-import Api from "./Api";
+import Api from '../components/Api'
 
-export default function Apis({ favorites, apis, toggleFavorites }) {
+export default function HomePage({ favorites, apis, toggleFavorites }) {
   return (
     <div>
       {apis.map((api) => (

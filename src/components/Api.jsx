@@ -6,15 +6,12 @@ export default function Api({ api, toggleFavorites, isFavorite }) {
   return (
     <div key={api.id}>
       <div>
-        {/* <h1>{api.userId}</h1> */}
         <h2> {api.title}</h2>
         <div>
-          <Link to={`/details/${api.id}`}>
+          <Link to={`/Details/${api.id}`}>
         View More Details
         </Link>
         </div>
-        
-        {/* <h4>{api.body}</h4> */}
         <label>
           <input
             type="checkbox"
@@ -22,7 +19,7 @@ export default function Api({ api, toggleFavorites, isFavorite }) {
             onChange={() => toggleFavorites(api.id)}
           ></input>
           <span>
-            <span>{isFavorite ? "In Favorites" : "Mark as favorite"}</span>
+            <span>{isFavorite ? "In Favorites" : "Add to favorites"}</span>
           </span>
         </label>
       </div>

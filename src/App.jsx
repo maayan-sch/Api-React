@@ -1,31 +1,29 @@
-import axios from "axios";
 import { useState,useEffect } from 'react'
 //import reactLogo from './assets/react.svg'
 //import viteLogo from './assets/vite.svg'
 //import heroImg from './assets/hero.png'
 //import './App.css'
-import Apis from './components/Apis'
+import HomePage from './pages/HomePage'
 import { Route, Routes, Link } from "react-router-dom";
-import Favorites from './components/Favorites'
-import Details from "./components/Details";
+import FavoritesPage from './pages/FavoritesPage'
+import DetailsPage from './pages/DetailsPage';
+import loadPosts from './services/loadingPosts'
 
 export default function App() {
   const [apis, setApis] = useState([]);
   const [favorites, setFavorites] = useState([]);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
 
    useEffect(() => {
-    axios
-  .get("https://jsonplaceholder.typicode.com/posts", {
-  })
-  .then((response) => {
-    console.log(response.data);
+    loadPosts().then((response) => {
     setApis(response.data);
   })
   .catch((error) => {
-    console.error(error);
+    setError(error);
   })
   .finally(() => {
-    console.log("Request completed");
+    setLoading(false);
   });
 },[])
 
@@ -36,6 +34,15 @@ const toggleFavorites = (apiId) => {
         : [...prev, apiId],
     );
   }
+
+if(loading)
+  return <h3>Loading...</h3>
+
+if(error)
+  return <h3>The error is: {error.message}</h3>
+
+if(apis.length === 0)
+  return <h3>There is no data</h3>
 
 return (
     <div>
@@ -54,7 +61,7 @@ return (
             <Route
               path="/"
               element={
-                <Apis
+                <HomePage
                   favorites={favorites}
                   apis={apis}
                   toggleFavorites={toggleFavorites}
@@ -64,7 +71,7 @@ return (
             <Route
               path="/favorites"
               element={
-                <Favorites
+                <FavoritesPage
                   favorites={favorites}
                   apis={apis}
                   toggleFavorites={toggleFavorites}
@@ -72,9 +79,9 @@ return (
               }
             />
             <Route
-              path="/details/:id"
+              path="/Details/:id"
               element={
-                <Details
+                <DetailsPage
                 favorites={favorites}
                 toggleFavorites={toggleFavorites}
                 apis={apis}
