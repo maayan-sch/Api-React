@@ -1,8 +1,4 @@
 import { useState,useEffect } from 'react'
-//import reactLogo from './assets/react.svg'
-//import viteLogo from './assets/vite.svg'
-//import heroImg from './assets/hero.png'
-//import './App.css'
 import HomePage from './pages/HomePage'
 import { Route, Routes, Link } from "react-router-dom";
 import FavoritesPage from './pages/FavoritesPage'
@@ -11,9 +7,14 @@ import loadPosts from './services/loadingPosts'
 
 export default function App() {
   const [apis, setApis] = useState([]);
-  const [favorites, setFavorites] = useState([]);
+ const [favorites, setFavorites] = useState(() => {
+  const saved = localStorage.getItem("favorites");
+  return saved ? JSON.parse(saved) : [];
+});
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
+  const [userId, setUserId] = useState("All Users");
+
 
    useEffect(() => {
     loadPosts().then((response) => {
@@ -27,13 +28,32 @@ export default function App() {
   });
 },[])
 
-const toggleFavorites = (apiId) => {
+useEffect(() => {
+  localStorage.setItem("favorites", JSON.stringify(favorites));
+}, [favorites]);
+
+ const toggleFavorites = (apiId) => {
     setFavorites((prev) =>
       prev.includes(apiId)
         ? prev.filter((id) => id !== apiId)
         : [...prev, apiId],
     );
   }
+
+  const handleUserIdChange = (e) => {
+    setUserId(e.target.value);
+  };
+  
+  const matchesUserId = (userId, api) => {
+    return (
+      userId === "All Users" ||
+      api.userId === parseInt(userId)
+    );
+  };
+
+  const filteredUserId = apis.filter(
+    (api) =>
+      matchesUserId(userId, api))
 
 if(loading)
   return <h3>Loading...</h3>
@@ -45,29 +65,44 @@ if(apis.length === 0)
   return <h3>There is no data</h3>
 
 return (
-    <div>
+    <div className="min-h-screen bg-slate-100">
       <div>
-          <nav>
-            <ul>
-              <li>
-                <Link to="/">All Posts</Link>
-              </li>
-              <li>
-                <Link to="/favorites">Favorites</Link>
-              </li>
-            </ul>
-          </nav>
+          <nav className="fixed top-0 left-0 w-full h-16 z-50 bg-slate-800 shadow-lg">
+  <ul className="flex items-center gap-6 px-8 py-4">
+    <li>
+      <Link
+        to="/"
+        className="rounded-md px-4 py-2 text-white transition hover:bg-slate-700"
+      >
+        All Posts
+      </Link>
+    </li>
+
+    <li>
+      <Link
+        to="/favorites"
+        className="rounded-md px-4 py-2 text-white transition duration-200 hover:bg-slate-700 hover:text-cyan-500 "
+      >
+        Favorites
+      </Link>
+    </li>
+  </ul>
+</nav>
           <Routes>
-            <Route
+            <Route 
               path="/"
               element={
-                <HomePage
+              <div>
+                 <HomePage
                   favorites={favorites}
-                  apis={apis}
+                  filteredUserId={filteredUserId}
                   toggleFavorites={toggleFavorites}
+                  handleUserIdChange={handleUserIdChange}
+                  userId={userId}
                 />
+              </div>
               }
-            />
+              />
             <Route
               path="/favorites"
               element={
