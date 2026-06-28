@@ -1,16 +1,128 @@
-# React + Vite
+# React Posts App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 📌 Overview
 
-Currently, two official plugins are available:
+This project is a React application that displays posts from an external API (JSONPlaceholder).  
+Users can browse posts, filter them by user ID, view detailed information for each post, and manage a favorites list.  
+Favorites are saved in localStorage so they remain even after page refresh.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🚀 Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Fetch posts from external API (JSONPlaceholder)
+- Display posts in a responsive grid layout
+- Filter posts by User ID
+- View full details for each post
+- Add / remove posts from favorites
+- Favorites page to view saved posts
+- Persistent favorites using localStorage
+- React Router navigation between pages
+- Responsive UI using Tailwind CSS
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Technologies Used
+
+- React (Hooks: useState, useEffect)
+- React Router DOM
+- Axios
+- Tailwind CSS
+- LocalStorage API
+- Vite
+
+---
+
+## 📁 Project Structure
+
+src/
+│
+├── components/
+│ └── Api.jsx
+│
+├── pages/
+│ ├── HomePage.jsx
+│ ├── FavoritesPage.jsx
+│ └── DetailsPage.jsx
+│
+├── services/
+│ └── loadingPosts.js
+│
+├── App.jsx
+└── main.jsx
+
+---
+
+## 🔄 How It Works
+
+- On load, the app fetches posts from:
+  https://jsonplaceholder.typicode.com/posts
+
+- Posts are stored in state
+
+- Users can:
+  - Filter posts by user ID
+  - Open post details
+  - Add/remove favorites
+
+- Favorites are saved in localStorage and restored on refresh
+
+---
+
+## ⭐ Favorites System
+
+- Click button to add/remove a post from favorites
+- Favorites are stored in localStorage
+- Favorites persist after refresh
+
+---
+
+## 📄 Pages
+
+### Home Page
+
+- Displays all posts
+- Filter by user ID
+- Grid layout of post cards
+
+### Favorites Page
+
+- Displays only saved favorite posts
+
+### Details Page
+
+- Shows full post content
+- Add/remove favorite button
+
+---
+
+## 🎨 UI Design
+
+- Built with Tailwind CSS
+- Fixed navigation bar
+- Clean card-based layout
+- Hover effects and transitions
+- Fully responsive (mobile & desktop)
+
+---
+
+## ▶️ How to Run the Project
+
+```bash
+npm install
+npm run dev
+```
+
+## 📸 Screenshots
+
+### Home Page
+
+![Home Page](./screenshots/home.png)
+
+### Favorites Page
+
+![Favorites Page](./screenshots/favorites.png)
+
+### Details Page
+
+![Details Page](./screenshots/details.png)
