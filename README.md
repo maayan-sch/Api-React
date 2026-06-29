@@ -35,23 +35,25 @@ Favorites are saved in localStorage so they remain even after page refresh.
 
 ## 📁 Project Structure
 
+```text
 src/
-│
 ├── components/
-│ └── Api.jsx
-│
+│   └── Api.jsx
 ├── pages/
-│ ├── HomePage.jsx
-│ ├── FavoritesPage.jsx
-│ └── DetailsPage.jsx
-│
+│   ├── HomePage.jsx
+│   ├── FavoritesPage.jsx
+│   └── DetailsPage.jsx
 ├── services/
-│ └── loadingPosts.js
-│
+│   └── loadingPosts.js
+├── tests/
+│   ├── favorites.test.jsx
+│   └── filter.test.jsx
+├── utils/
+│   ├── favorites.js
+│   └── filter.js
 ├── App.jsx
 └── main.jsx
-
----
+```
 
 ## 🔄 How It Works
 
@@ -111,6 +113,22 @@ src/
 ```bash
 npm install
 npm run dev
+```
+
+---
+
+## 🧪 Running Tests
+
+Run all unit tests:
+
+```bash
+npx vitest
+```
+
+Or run the tests once without watch mode:
+
+```bash
+npx vitest run
 ```
 
 ## 📸 Screenshots
