@@ -3,7 +3,7 @@
 import Api from '../components/Api'
 
 
-export default function HomePage({ favorites, toggleFavorites, filteredUserId,userId,handleUserIdChange }) {
+export default function HomePage({ favorites, toggleFavorites, filteredPosts,userId,handleUserIdChange }) {
   return (
     <div className="pt-16">
       <div className="sticky top-16 z-40 flex items-center gap-4 px-8 py-2 bg-slate-700 shadow-md w-full">
@@ -30,7 +30,7 @@ export default function HomePage({ favorites, toggleFavorites, filteredUserId,us
   </select>
 </div>
        <div className="mx-auto mt-4 grid max-w-7xl grid-cols-1 gap-6 p-6 md:grid-cols-2 lg:grid-cols-3">
-      {filteredUserId.map((api) => (
+      {filteredPosts.map((api) => (
         <Api
           api={api}
           key={api.id}

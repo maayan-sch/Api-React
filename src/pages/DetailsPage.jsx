@@ -2,13 +2,15 @@
 //import "../styles.css";
 import {useParams} from 'react-router-dom';
 
-export default function DetailsPage({apis, favorites, toggleFavorites}) {
+export default function DetailsPage({posts, favorites, toggleFavorites, loading}) {
 const param = useParams();
 const id = parseInt(param.id);
 
-const api = apis.find(api => api.id === id)
-if (!api)
+const api = posts.find(api => api.id === id)
+if (loading)
     return <h3>Loading...</h3>
+if (!api)
+  return <h3>Post not found</h3>
   
 const isFavorite=favorites.includes(api.id)
 

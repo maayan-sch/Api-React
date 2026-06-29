@@ -4,9 +4,10 @@ import { Route, Routes, Link } from "react-router-dom";
 import FavoritesPage from './pages/FavoritesPage'
 import DetailsPage from './pages/DetailsPage';
 import loadPosts from './services/loadingPosts'
+import  updateFavorites from "./utils/favorites";
 
 export default function App() {
-  const [apis, setApis] = useState([]);
+  const [posts, setPosts] = useState([]);
  const [favorites, setFavorites] = useState(() => {
   const saved = localStorage.getItem("favorites");
   return saved ? JSON.parse(saved) : [];
@@ -18,7 +19,7 @@ export default function App() {
 
    useEffect(() => {
     loadPosts().then((response) => {
-    setApis(response.data);
+    setPosts(response.data);
   })
   .catch((error) => {
     setError(error);
@@ -34,9 +35,7 @@ useEffect(() => {
 
  const toggleFavorites = (apiId) => {
     setFavorites((prev) =>
-      prev.includes(apiId)
-        ? prev.filter((id) => id !== apiId)
-        : [...prev, apiId],
+      updateFavorites(prev,apiId)
     );
   }
 
@@ -51,7 +50,7 @@ useEffect(() => {
     );
   };
 
-  const filteredUserId = apis.filter(
+  const filteredPosts = posts.filter(
     (api) =>
       matchesUserId(userId, api))
 
@@ -61,7 +60,7 @@ if(loading)
 if(error)
   return <h3>The error is: {error.message}</h3>
 
-if(apis.length === 0)
+if(posts.length === 0)
   return <h3>There is no data</h3>
 
 return (
@@ -95,7 +94,7 @@ return (
               <div>
                  <HomePage
                   favorites={favorites}
-                  filteredUserId={filteredUserId}
+                  filteredPosts={filteredPosts}
                   toggleFavorites={toggleFavorites}
                   handleUserIdChange={handleUserIdChange}
                   userId={userId}
@@ -108,7 +107,7 @@ return (
               element={
                 <FavoritesPage
                   favorites={favorites}
-                  apis={apis}
+                  posts={posts}
                   toggleFavorites={toggleFavorites}
                 />
               }
@@ -119,7 +118,8 @@ return (
                 <DetailsPage
                 favorites={favorites}
                 toggleFavorites={toggleFavorites}
-                apis={apis}
+                posts={posts}
+                loading={loading}
                 />
               }
             />
