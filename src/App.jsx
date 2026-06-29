@@ -5,6 +5,7 @@ import FavoritesPage from './pages/FavoritesPage'
 import DetailsPage from './pages/DetailsPage';
 import loadPosts from './services/loadingPosts'
 import  updateFavorites from "./utils/favorites";
+import matchesUserId from "./utils/filter"
 
 export default function App() {
   const [posts, setPosts] = useState([]);
@@ -43,12 +44,7 @@ useEffect(() => {
     setUserId(e.target.value);
   };
   
-  const matchesUserId = (userId, api) => {
-    return (
-      userId === "All Users" ||
-      api.userId === parseInt(userId)
-    );
-  };
+  
 
   const filteredPosts = posts.filter(
     (api) =>
