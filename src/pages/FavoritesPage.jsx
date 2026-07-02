@@ -1,6 +1,4 @@
-//import React from "react";
-//import "../styles.css";
-import Api from '../components/Api';
+import PostCard from '../components/PostCard';
 
 export default function FavoritesPage({ favorites, posts, toggleFavorites }) {
 
@@ -11,14 +9,14 @@ export default function FavoritesPage({ favorites, posts, toggleFavorites }) {
         </h1>
       <div>
         {favorites.map((id) => {
-          const api = posts.find((api) => api.id === id);
+          const post = posts.find((post) => post.id === id);
           return (
-            <Api
+            <PostCard
               key={id}
-              api={api}
+              post={post}
               isFavorite={true}
               toggleFavorites={toggleFavorites}
-            ></Api>
+            />
           );
         })}
       </div>

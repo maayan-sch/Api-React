@@ -1,10 +1,9 @@
 import axios from "axios";
 
 
-export default function loadPosts() {
+export default function loadPosts(url) {
    return axios
-  .get("https://jsonplaceholder.typicode.com/posts", {
-  })
+  .get(url)
   }
 
 
