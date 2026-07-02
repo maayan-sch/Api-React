@@ -1,28 +1,26 @@
-//import React from "react";
-//import "../styles.css";
 import { Link } from "react-router-dom";
 
-export default function Api({ api, toggleFavorites, isFavorite }) {
+export default function PostCard({ post, toggleFavorites, isFavorite }) {
   return (
    <div
-  key={api.id}
+  key={post.id}
      className="flex h-full flex-col rounded-xl border border-slate-200 bg-white p-6 shadow-md transition duration-300 hover:-translate-y-1 hover:shadow-2xl"
 
 >
   <div className="flex flex-1 flex-col">
     <p className="mb-2 text-sm font-medium text-slate-400">
-  Post #{api.id}
+  Post #{post.id}
 </p>
   <h2
-    title={api.title}
+    title={post.title}
     className="line-clamp-2 text-center text-xl font-bold text-slate-800"
   >
-    {api.title}
+    {post.title}
   </h2>
 
   <div className="mt-auto mb-6 text-center">
     <Link
-      to={`/Details/${api.id}`}
+      to={`/Details/${post.id}`}
       className="font-medium text-cyan-600 transition hover:text-cyan-500"
     >
       View More Details
@@ -31,7 +29,7 @@ export default function Api({ api, toggleFavorites, isFavorite }) {
 </div>
 
 <button
-  onClick={() => toggleFavorites(api.id)}
+  onClick={() => toggleFavorites(post.id)}
   className={`mt-auto mx-auto flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition
     ${
       isFavorite

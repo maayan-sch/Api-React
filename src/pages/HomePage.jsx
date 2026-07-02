@@ -1,6 +1,4 @@
-//import React, { useState } from "react";
-//import "../styles.css";
-import Api from '../components/Api'
+import PostCard from '../components/PostCard'
 
 
 export default function HomePage({ favorites, toggleFavorites, filteredPosts,userId,handleUserIdChange }) {
@@ -30,11 +28,11 @@ export default function HomePage({ favorites, toggleFavorites, filteredPosts,use
   </select>
 </div>
        <div className="mx-auto mt-4 grid max-w-7xl grid-cols-1 gap-6 p-6 md:grid-cols-2 lg:grid-cols-3">
-      {filteredPosts.map((api) => (
-        <Api
-          api={api}
-          key={api.id}
-          isFavorite={favorites.includes(api.id)}
+      {filteredPosts.map((post) => (
+        <PostCard
+          post={post}
+          key={post.id}
+          isFavorite={favorites.includes(post.id)}
           toggleFavorites={toggleFavorites}
         />
       ))}

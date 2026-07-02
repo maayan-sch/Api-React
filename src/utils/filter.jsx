@@ -1,6 +1,6 @@
-export default function matchesUserId (userId, api)  {
+export default function matchesUserId (userId, post)  {
     return (
       userId === "All Users" ||
-      api.userId === parseInt(userId)
+      post.userId === parseInt(userId)
     );
   };
