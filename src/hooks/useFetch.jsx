@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import loadPosts from "../services/loadingPosts";
 
 export default function useFetch(url) {
@@ -6,18 +6,22 @@ export default function useFetch(url) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  useEffect(() => {
+  const fetchData = useCallback(() => {
     loadPosts(url)
       .then((response) => {
         setData(response.data);
       })
-      .catch((error) => {
-        setError(error);
+      .catch(() => {
+        setError("Could not load data right now.");
       })
       .finally(() => {
         setLoading(false);
       });
   }, [url]);
 
-  return { data, loading, error };
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  return { data, loading, error, fetchData };
 }

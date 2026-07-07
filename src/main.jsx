@@ -1,23 +1,34 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router";
-import ErrorBoundary from './components/ErrorBoundary.jsx'
+import ErrorBoundary from "./components/ErrorBoundary.jsx";
 
-import './index.css'
-import App from './App.jsx'
+import "./index.css";
+import App from "./App.jsx";
 
-createRoot(document.getElementById('root')).render(
+document.documentElement.classList.add("dark");
+
+createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
-    <ErrorBoundary fallback=
-    {
-      <div>
-    <h1 className="text-xl font-semibold mb-4">Something went wrong</h1>
-    <button onClick={() => window.location.reload()} className="px-5 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">Try again</button>
-    </div>
-  }>
-      <App />
-    </ErrorBoundary>
+      <ErrorBoundary
+        fallback={
+          <div>
+            <h3 className="text-lg font-medium text-[#274c77] mb-3">
+              Something went wrong
+            </h3>
+
+            <button
+              onClick={() => window.location.reload()}
+              className="text-[#6096ba] hover:text-[#a3cef1] underline cursor-pointer"
+            >
+              Try Again
+            </button>
+          </div>
+        }
+      >
+        <App />
+      </ErrorBoundary>
     </BrowserRouter>
   </StrictMode>,
-)
+);

@@ -2,34 +2,41 @@
 
 ## 📌 Overview
 
-This project is a React application that displays posts from an external API (JSONPlaceholder).  
-Users can browse posts, filter them by user ID, view detailed information for each post, and manage a favorites list.  
-Favorites are saved in localStorage so they remain even after page refresh.
+React Posts App is a responsive single-page application built with React and Vite that consumes data from the JSONPlaceholder API.
+
+The application allows users to browse posts, filter them by user ID, view detailed information, manage a persistent favorites list, and enjoy a modern user experience with loading skeletons, animations, and Dark Mode support.
 
 ---
 
 ## 🚀 Features
 
-- Fetch posts from external API (JSONPlaceholder)
-- Display posts in a responsive grid layout
+- Fetch posts from the JSONPlaceholder API
+- Responsive card-based layout
 - Filter posts by User ID
-- View full details for each post
-- Add / remove posts from favorites
-- Favorites page to view saved posts
-- Persistent favorites using localStorage
-- React Router navigation between pages
-- Responsive UI using Tailwind CSS
+- View full details for every post
+- Add and remove favorites
+- Favorites persist using localStorage
+- Custom `useFetch` hook for data fetching
+- Skeleton loading screen while fetching data
+- Error handling with retry functionality
+- Empty states for missing data and favorites
+- Error Boundary for unexpected rendering errors
+- Page animations using Framer Motion
+- Light and Dark Mode support
+- Responsive design for desktop and mobile
 
 ---
 
 ## 🛠️ Technologies Used
 
-- React (Hooks: useState, useEffect)
+- React
+- Vite
 - React Router DOM
 - Axios
 - Tailwind CSS
+- Framer Motion
 - LocalStorage API
-- Vite
+- Vitest
 
 ---
 
@@ -38,7 +45,10 @@ Favorites are saved in localStorage so they remain even after page refresh.
 ```text
 src/
 ├── components/
-│   └── Api.jsx
+│   ├── ErrorBoundary.jsx
+│   └── PostCard.jsx
+├── hooks/
+│   └── useFetch.js
 ├── pages/
 │   ├── HomePage.jsx
 │   ├── FavoritesPage.jsx
@@ -55,81 +65,141 @@ src/
 └── main.jsx
 ```
 
-## 🔄 How It Works
+---
 
-- On load, the app fetches posts from:
-  https://jsonplaceholder.typicode.com/posts
+## 🔄 Application Flow
 
-- Posts are stored in state
+1. The application fetches posts from:
 
-- Users can:
-  - Filter posts by user ID
-  - Open post details
-  - Add/remove favorites
+```
+https://jsonplaceholder.typicode.com/posts
+```
 
-- Favorites are saved in localStorage and restored on refresh
+2. A custom `useFetch` hook manages:
+
+- Loading state
+- Error state
+- Retrieved data
+- Retry functionality
+
+3. Users can:
+
+- Browse all posts
+- Filter posts by User ID
+- View detailed information
+- Add or remove favorites
+
+4. Favorite posts are stored in localStorage and automatically restored when the application reloads.
 
 ---
 
-## ⭐ Favorites System
+## ⭐ Favorites
 
-- Click button to add/remove a post from favorites
-- Favorites are stored in localStorage
-- Favorites persist after refresh
+- Add or remove favorites with one click.
+- Favorites persist after refreshing the page.
+- Dedicated Favorites page.
+- Empty state displayed when no favorites exist.
 
 ---
 
 ## 📄 Pages
 
-### Home Page
+### 🏠 Home Page
 
 - Displays all posts
-- Filter by user ID
-- Grid layout of post cards
+- Filter posts by User ID
+- Responsive grid layout
+- Skeleton loading state
+- Error handling
+- Empty data handling
 
-### Favorites Page
+### ❤️ Favorites Page
 
-- Displays only saved favorite posts
+- Displays saved favorite posts
+- Animated empty state
+- Remove favorites directly
 
-### Details Page
+### 📖 Details Page
 
-- Shows full post content
-- Add/remove favorite button
+- Displays complete post information
+- Shows Post ID and User ID
+- Add or remove favorites
+- Error and loading handling
 
 ---
 
-## 🎨 UI Design
+## ⚙️ Custom Hook
 
-- Built with Tailwind CSS
+### useFetch
+
+A reusable custom hook responsible for:
+
+- Fetching API data
+- Managing loading state
+- Managing error state
+- Providing a retry (`fetchData`) function
+
+---
+
+## 🛡️ Error Handling
+
+The project includes:
+
+- Error Boundary to catch unexpected rendering errors
+- API error handling with user-friendly messages
+- Retry button when data loading fails
+
+---
+
+## 🎨 UI & UX
+
+The interface is built with Tailwind CSS and includes:
+
+- Responsive layout
 - Fixed navigation bar
-- Clean card-based layout
-- Hover effects and transitions
-- Fully responsive (mobile & desktop)
+- Card-based design
+- Hover effects
+- Smooth transitions
+- Framer Motion animations
+- Skeleton loaders
+- Empty states
+- Light and Dark Mode
 
 ---
 
-## ▶️ How to Run the Project
+## 🧪 Testing
 
-```bash
-npm install
-npm run dev
-```
+Unit tests are written using Vitest.
 
----
-
-## 🧪 Running Tests
-
-Run all unit tests:
+Run all tests:
 
 ```bash
 npx vitest
 ```
 
-Or run the tests once without watch mode:
+Run once:
 
 ```bash
 npx vitest run
 ```
+
+---
+
+## ▶️ Running the Project
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+---
 
 ## 📸 Screenshots
 
