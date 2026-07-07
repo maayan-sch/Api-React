@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export default function DetailsPage({
   posts,
@@ -7,73 +8,91 @@ export default function DetailsPage({
   toggleFavorites,
   loading,
   error,
+  refetch,
 }) {
-  const param = useParams();
-
-  const id = parseInt(param.id);
+  const { id: routeId } = useParams();
+  const id = Number(routeId);
 
   const post = posts.find((post) => post.id === id);
 
-  if (loading) return <h3>Loading...</h3>;
+  if (loading)
+    return <h3 className="text-center text-[#6096ba] pt-10">Loading...</h3>;
 
   if (!post)
     return (
-      <div>
-        <h3>Page not found</h3>
-        <Link
-          to="/"
-          className="rounded-md px-4 py-2 text-white transition hover:bg-slate-700"
-        >
+      <div className="text-center pt-10">
+        <h3 className="text-lg font-medium text-[#274c77] mb-3">
+          Post not found
+        </h3>
+
+        <Link to="/" className="text-[#6096ba] hover:text-[#a3cef1] underline">
           Go Home
         </Link>
       </div>
     );
 
-  if (error) {
+  if (error)
     return (
-      <div>
-        <h3>There was an error, Trt again</h3>
-        <button onClick={() => window.location.reload()}>Try Again</button>
+      <div className="text-center pt-10">
+        <h3 className="text-lg font-medium text-[#274c77] mb-3">
+          Something went wrong
+        </h3>
+
+        <p className="text-[#8b8c89] mb-3">{error}</p>
+
+        <button
+          onClick={() => refetch()}
+          className="text-[#6096ba] hover:text-[#a3cef1] underline cursor-pointer"
+        >
+          Try Again
+        </button>
       </div>
     );
-  }
 
   const isFavorite = favorites.includes(post.id);
 
   return (
-    <div className="min-h-screen bg-slate-50 pt-20">
+    <motion.div
+      className="min-h-screen bg-[#e7ecef] pt-20 dark:bg-[#0d1b2a]"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.4 }}
+    >
       <div className="mx-auto max-w-4xl px-6">
-        <div className="rounded-xl border border-slate-200 bg-white p-8 shadow-md">
-          <p className="mb-2 text-sm font-medium text-slate-400">
+        <div className="flex h-full flex-col rounded-xl border border-[#e7ecef] bg-white p-8 shadow-md transition duration-300 hover:shadow-2xl dark:border-[#415a77] dark:bg-[#1b263b]">
+          <p className="mb-2 text-sm font-medium text-[#8b8c89] dark:text-[#778da9]">
             Post #{post.id}
           </p>
 
-          <p className="mb-6 text-sm font-medium text-cyan-600">
+          <p className="mb-6 text-sm font-medium text-[#6096ba] dark:text-[#778da9]">
             User #{post.userId}
           </p>
 
-          <h1 className="mb-6 text-3xl font-semibold text-slate-800">
+          <h1 className="mb-6 text-3xl font-bold text-[#274c77] dark:text-[#e0e1dd]">
             {post.title}
           </h1>
 
-          <div className="mb-8 border-t border-slate-200 pt-6">
-            <p className="whitespace-pre-line leading-8 text-slate-600">
+          <div className="mb-8 border-t border-[#e7ecef] pt-6">
+            <p className="whitespace-pre-line leading-8 text-[#8b8c89] dark:text-[#778da9]">
               {post.body}
             </p>
           </div>
 
-          <button
-            onClick={() => toggleFavorites(post.id)}
-            className={`rounded-lg px-5 py-2 font-medium transition ${
-              isFavorite
-                ? "bg-cyan-600 text-white hover:bg-cyan-700"
-                : "border border-cyan-600 text-cyan-600 hover:bg-cyan-50"
-            }`}
-          >
-            {isFavorite ? "★ Remove from Favorites" : "☆ Add to Favorites"}
-          </button>
+          <div className="mt-auto flex justify-center">
+            <button
+              onClick={() => toggleFavorites(post.id)}
+              className={`flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition
+              ${
+                isFavorite
+                  ? "bg-[#6096ba] text-white hover:bg-[#a3cef1]"
+                  : "border border-[#6096ba] text-[#6096ba] hover:bg-[#e7ecef]"
+              }`}
+            >
+              {isFavorite ? "★ Remove from favorites" : "☆ Add to Favorites"}
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
