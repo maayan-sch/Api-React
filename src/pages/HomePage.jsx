@@ -15,7 +15,7 @@ export default function HomePage({
         <select
           value={userId}
           onChange={handleUserIdChange}
-          className="rounded-md bg-[#274c77] dark:bg-[#1b263b] px-4 py-2 text-white dark:text-[#e0e1dd]"
+          className="rounded-md px-4 py-2 bg-[#274c77] dark:bg-[#415a77] text-white focus:outline-none focus:border-[#a3cef1] dark:focus:border-[#778da9]"
         >
           <option>All Users</option>
           <option>1</option>
