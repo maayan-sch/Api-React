@@ -18,19 +18,6 @@ export default function DetailsPage({
   if (loading)
     return <h3 className="text-center text-[#6096ba] pt-10">Loading...</h3>;
 
-  if (!post)
-    return (
-      <div className="text-center pt-10">
-        <h3 className="text-lg font-medium text-[#274c77] mb-3">
-          Post not found
-        </h3>
-
-        <Link to="/" className="text-[#6096ba] hover:text-[#a3cef1] underline">
-          Go Home
-        </Link>
-      </div>
-    );
-
   if (error)
     return (
       <div className="text-center pt-10">
@@ -46,6 +33,19 @@ export default function DetailsPage({
         >
           Try Again
         </button>
+      </div>
+    );
+
+  if (!post)
+    return (
+      <div className="text-center pt-10">
+        <h3 className="text-lg font-medium text-[#274c77] mb-3">
+          Post not found
+        </h3>
+
+        <Link to="/" className="text-[#6096ba] hover:text-[#a3cef1] underline">
+          Go Home
+        </Link>
       </div>
     );
 
@@ -84,8 +84,8 @@ export default function DetailsPage({
               className={`flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition
               ${
                 isFavorite
-                  ? "bg-[#6096ba] text-white hover:bg-[#a3cef1]"
-                  : "border border-[#6096ba] text-[#6096ba] hover:bg-[#e7ecef]"
+                  ? "bg-[#6096ba] text-white hover:bg-[#a3cef1] dark:bg-[#415a77] hover:dark:bg-[#778da9]"
+                  : "border border-[#6096ba] text-[#6096ba] hover:bg-[#e7ecef] dark:bg-0 dark:text-white dark:border-[#e0e1dd] hover:dark:bg-[#778da9]"
               }`}
             >
               {isFavorite ? "★ Remove from favorites" : "☆ Add to Favorites"}

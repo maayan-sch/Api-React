@@ -70,23 +70,7 @@ export default function App() {
       </div>
     );
   }
-  if (error)
-    return (
-      <div className="text-center pt-10">
-        <h3 className="text-lg font-medium text-[#8b8c89] mb-3">
-          Something went wrong
-        </h3>
 
-        <p className="text-[#8b8c89] mb-3">{error}</p>
-
-        <button
-          onClick={() => refetch()}
-          className="text-[#6096ba] hover:text-[#8b8c89] underline cursor-pointer"
-        >
-          Try Again
-        </button>
-      </div>
-    );
   if (posts.length === 0)
     return (
       <h3 className="text-center text-[#8b8c89] pt-10">There is no data</h3>
@@ -149,45 +133,62 @@ export default function App() {
             </li>
           </ul>
         </nav>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <div>
-                <HomePage
+        {error ? (
+          <div className="text-center pt-10">
+            <h3 className="text-lg font-medium text-[#8b8c89] mb-3">
+              Something went wrong
+            </h3>
+
+            <p className="text-[#8b8c89] mb-3">{error}</p>
+
+            <button
+              onClick={() => refetch()}
+              className="text-[#6096ba] hover:text-[#8b8c89] underline cursor-pointer"
+            >
+              Try Again
+            </button>
+          </div>
+        ) : (
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <div>
+                  <HomePage
+                    favorites={favorites}
+                    filteredPosts={filteredPosts}
+                    toggleFavorites={toggleFavorites}
+                    handleUserIdChange={handleUserIdChange}
+                    userId={userId}
+                  />
+                </div>
+              }
+            />
+            <Route
+              path="/favorites"
+              element={
+                <FavoritesPage
                   favorites={favorites}
-                  filteredPosts={filteredPosts}
+                  posts={posts}
                   toggleFavorites={toggleFavorites}
-                  handleUserIdChange={handleUserIdChange}
-                  userId={userId}
                 />
-              </div>
-            }
-          />
-          <Route
-            path="/favorites"
-            element={
-              <FavoritesPage
-                favorites={favorites}
-                posts={posts}
-                toggleFavorites={toggleFavorites}
-              />
-            }
-          />
-          <Route
-            path="/Details/:id"
-            element={
-              <DetailsPage
-                favorites={favorites}
-                toggleFavorites={toggleFavorites}
-                posts={posts}
-                loading={loading}
-                error={error}
-                refetch={refetch}
-              />
-            }
-          />
-        </Routes>
+              }
+            />
+            <Route
+              path="/Details/:id"
+              element={
+                <DetailsPage
+                  favorites={favorites}
+                  toggleFavorites={toggleFavorites}
+                  posts={posts}
+                  loading={loading}
+                  error={error}
+                  refetch={refetch}
+                />
+              }
+            />
+          </Routes>
+        )}
       </div>
     </div>
   );
