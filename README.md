@@ -48,19 +48,19 @@ src/
 │   ├── ErrorBoundary.jsx
 │   └── PostCard.jsx
 ├── hooks/
-│   └── useFetch.js
+│   └── useFetch.jsx
 ├── pages/
 │   ├── HomePage.jsx
 │   ├── FavoritesPage.jsx
 │   └── DetailsPage.jsx
 ├── services/
-│   └── loadingPosts.js
+│   └── loadingPosts.jsx
 ├── tests/
 │   ├── favorites.test.jsx
 │   └── filter.test.jsx
 ├── utils/
-│   ├── favorites.js
-│   └── filter.js
+│   ├── favorites.jsx
+│   └── filter.jsx
 ├── App.jsx
 └── main.jsx
 ```
@@ -92,6 +92,16 @@ https://jsonplaceholder.typicode.com/posts
 4. Favorite posts are stored in localStorage and automatically restored when the application reloads.
 
 ---
+
+## 🔄 What changed and why
+
+1. Extracted the data fetching logic into a reusable `useFetch` hook to centralize `data`, `loading`, and `error` state management.
+
+2. Added retry functionality that allows repeating failed API requests without refreshing the entire page.
+
+3. Added an `ErrorBoundary` wrapper to catch unexpected rendering errors and display a fallback UI instead of crashing the application.
+
+4. Added Light/Dark Mode support using theme state, with a toggle button that switches themes without page refresh.
 
 ## ⭐ Favorites
 
