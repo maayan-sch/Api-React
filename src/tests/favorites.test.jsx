@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import  updateFavorites  from "../utils/favorites";
+import updateFavorites from "../utils/favorites";
 
 describe("updateFavorites", () => {
   it("adds a new favorite", () => {
