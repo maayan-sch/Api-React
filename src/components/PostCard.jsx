@@ -7,7 +7,6 @@ export default function PostCard({ post, toggleFavorites, isFavorite }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
-      key={post.id}
       className="flex h-full flex-col rounded-xl bg-white dark:bg-[#1b263b] border border-[#e7ecef] dark:border-[#415a77] p-6 shadow-md transition duration-300 hover:-translate-y-1 hover:shadow-2xl"
     >
       <div className="flex flex-1 flex-col">
@@ -33,7 +32,7 @@ export default function PostCard({ post, toggleFavorites, isFavorite }) {
         onClick={() => toggleFavorites(post.id)}
         className={`mt-auto mx-auto flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition ${
           isFavorite
-            ? "bg-[#6096ba] text-white hover:bg-[#a3cef1] dark:bg-[#415a77]"
+            ? "bg-[#6096ba] text-white hover:bg-[#a3cef1] dark:bg-[#415a77] hover:dark:bg-[#778da9]"
             : "border border-[#6096ba] text-[#6096ba] hover:bg-[#e7ecef] dark:bg-0 dark:text-white dark:border-[#e0e1dd] hover:dark:bg-[#778da9]"
         }`}
       >
