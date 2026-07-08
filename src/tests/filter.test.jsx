@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import  matchesUserId  from "../utils/filter"
+import matchesUserId from "../utils/filter";
 
 describe("matchesUserId", () => {
   it("returns true for All Users", () => {
