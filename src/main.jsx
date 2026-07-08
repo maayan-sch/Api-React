@@ -1,12 +1,11 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router";
+import { Link } from "react-router-dom";
 import ErrorBoundary from "./components/ErrorBoundary.jsx";
 
 import "./index.css";
 import App from "./App.jsx";
-
-document.documentElement.classList.add("dark");
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -18,12 +17,12 @@ createRoot(document.getElementById("root")).render(
               Something went wrong
             </h3>
 
-            <button
-              onClick={() => window.location.reload()}
+            <Link
+              to="/"
               className="text-[#6096ba] hover:text-[#a3cef1] underline cursor-pointer"
             >
-              Try Again
-            </button>
+              Go Home
+            </Link>
           </div>
         }
       >
