@@ -1,5 +1,5 @@
 @import "tailwindcss";
-/* @custom-variant dark (&:where(.dark, .dark *)); */
+@custom-variant dark (&:where(.dark, .dark *));
 
 :root {
   --text: #6b6375;
@@ -31,6 +31,14 @@
   @media (max-width: 1024px) {
     font-size: 16px;
   }
+}
+html.dark {
+  --bg: #0d1b2a;
+  --text: #e0e1dd;
+}
+
+body {
+  margin: 0;
 }
 
 @media (prefers-color-scheme: dark) {
