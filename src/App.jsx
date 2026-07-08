@@ -20,6 +20,10 @@ export default function App() {
     return saved ? JSON.parse(saved) : [];
   });
   const [userId, setUserId] = useState("All Users");
+  const [theme, setTheme] = useState("light");
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", theme === "dark");
+  }, [theme]);
 
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
@@ -31,6 +35,10 @@ export default function App() {
 
   const handleUserIdChange = (e) => {
     setUserId(e.target.value);
+  };
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
   };
 
   const filteredPosts = posts.filter((post) => matchesUserId(userId, post));
@@ -73,7 +81,7 @@ export default function App() {
 
         <button
           onClick={() => refetch()}
-          className="text[#6096ba] hover:text-[#8b8c89] underline cursor-pointer"
+          className="text-[#6096ba] hover:text-[#8b8c89] underline cursor-pointer"
         >
           Try Again
         </button>
@@ -88,7 +96,7 @@ export default function App() {
     <div className="min-h-screen bg-[#e7ecef] text-black dark:bg-[#0d1b2a] dark:text-[#e0e1dd]">
       <div>
         <nav className="fixed top-0 left-0 w-full h-16 z-50 bg-[#274c77] dark:bg-[#1b263b] shadow-lg">
-          <ul className="flex items-center gap-6 px-8 py-4">
+          <ul className="flex items-center gap-6 px-8 py-4 w-full">
             <li>
               <Link
                 to="/"
@@ -105,6 +113,39 @@ export default function App() {
               >
                 Favorites
               </Link>
+            </li>
+
+            <li className="ml-auto">
+              <button
+                onClick={toggleTheme}
+                className={`relative flex h-8 w-32 items-center rounded-full p-1 transition ${
+                  theme === "dark" ? "bg-[#415a77]" : "bg-[#6096ba]"
+                }`}
+              >
+                <div
+                  className={`absolute h-6 w-14 rounded-full transition-transform duration-300 ${
+                    theme === "dark"
+                      ? "translate-x-16 bg-[#e0e1dd]"
+                      : "translate-x-0 bg-[#e7ecef]"
+                  }`}
+                />
+
+                <span
+                  className={`z-10 w-1/2 text-center text-xs font-semibold transition ${
+                    theme === "light" ? "text-[#274c77]" : "text-[#0d1b2a]"
+                  }`}
+                >
+                  Light
+                </span>
+
+                <span
+                  className={`z-10 w-1/2 text-center text-xs font-semibold transition ${
+                    theme === "dark" ? "text-[#0d1b2a]" : "text-[#e7ecef]"
+                  }`}
+                >
+                  Dark
+                </span>
+              </button>
             </li>
           </ul>
         </nav>

@@ -34,7 +34,7 @@ export default function PostCard({ post, toggleFavorites, isFavorite }) {
         className={`mt-auto mx-auto flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition ${
           isFavorite
             ? "bg-[#6096ba] text-white hover:bg-[#a3cef1] dark:bg-[#415a77]"
-            : "border border-[#6096ba] text-[#6096ba] hover:bg-[#e7ecef] dark:border-0 dark:bg-[#415a77] dark:text-white"
+            : "border border-[#6096ba] text-[#6096ba] hover:bg-[#e7ecef] dark:bg-0 dark:text-white dark:border-[#e0e1dd] hover:dark:bg-[#778da9]"
         }`}
       >
         {isFavorite ? "★ Remove from favorites" : "☆ Add to Favorites"}
