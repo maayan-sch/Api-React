@@ -18,16 +18,11 @@ export default function HomePage({
           className="rounded-md px-4 py-2 bg-[#274c77] dark:bg-[#415a77] text-white focus:outline-none focus:border-[#a3cef1] dark:focus:border-[#778da9]"
         >
           <option>All Users</option>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-          <option>6</option>
-          <option>7</option>
-          <option>8</option>
-          <option>9</option>
-          <option>10</option>
+          {Array.from({ length: 10 }, (_, index) => index + 1).map(
+            (userIdOption) => (
+              <option key={userIdOption}>{userIdOption}</option>
+            ),
+          )}
         </select>
       </div>
       <div className="mx-auto mt-4 grid max-w-7xl grid-cols-1 gap-6 p-6 md:grid-cols-2 lg:grid-cols-3">
