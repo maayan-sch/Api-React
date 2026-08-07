@@ -37,6 +37,7 @@ The application allows users to browse posts, filter them by user ID, view detai
 - Framer Motion
 - LocalStorage API
 - Vitest
+- React Testing Library
 
 ---
 
@@ -57,10 +58,12 @@ src/
 │   └── loadingPosts.jsx
 ├── tests/
 │   ├── favorites.test.jsx
-│   └── filter.test.jsx
+│   ├── filter.test.jsx
+│   └── useFetch.test.jsx
 ├── utils/
 │   ├── favorites.jsx
-│   └── filter.jsx
+│   ├── filter.jsx
+│   └── ErrorMessage.jsx
 ├── App.jsx
 └── main.jsx
 ```
@@ -102,6 +105,30 @@ https://jsonplaceholder.typicode.com/posts
 3. Added an `ErrorBoundary` wrapper to catch unexpected rendering errors and display a fallback UI instead of crashing the application.
 
 4. Added Light/Dark Mode support using theme state, with a toggle button that switches themes without page refresh.
+
+5. Improved API error handling by adding centralized error messages based on the error type and HTTP status code.
+
+   - Added handling for:
+
+     - 404 (resource not found)
+     - 500 (server error)
+     - Network errors
+     - Request timeout errors
+
+6. Improved `useFetch` lifecycle handling by preventing state updates after component unmount using cancellation logic.
+
+7. Added unit tests for the `useFetch` hook using `renderHook` from React Testing Library.
+
+   Tested scenarios:
+
+   - Initial hook state
+   - Successful API request
+   - Failed API request
+   - Retry after a failed request
+
+8. Configured Vitest with `jsdom` environment to support React hook testing with DOM APIs.
+
+---
 
 ## ⭐ Favorites
 
@@ -148,6 +175,7 @@ A reusable custom hook responsible for:
 - Managing loading state
 - Managing error state
 - Providing a retry (`fetchData`) function
+- Preventing state updates after component unmount
 
 ---
 
@@ -158,6 +186,12 @@ The project includes:
 - Error Boundary to catch unexpected rendering errors
 - API error handling with user-friendly messages
 - Retry button when data loading fails
+
+Additional improvements:
+
+- Centralized API error message handling.
+- Different error types are identified and converted into user-friendly messages.
+- Original errors are preserved while displaying readable messages to users.
 
 ---
 
@@ -180,6 +214,17 @@ The interface is built with Tailwind CSS and includes:
 ## 🧪 Testing
 
 Unit tests are written using Vitest.
+
+React hooks are tested using `renderHook` from React Testing Library.
+
+The `useFetch` hook tests cover:
+
+- Initial state
+- Successful data loading
+- Failed requests
+- Retry functionality
+
+API calls are mocked to keep tests isolated and independent from external services.
 
 Run all tests:
 
