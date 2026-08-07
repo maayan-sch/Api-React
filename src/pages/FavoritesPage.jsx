@@ -31,12 +31,12 @@ export default function FavoritesPage({ favorites, posts, toggleFavorites }) {
             </div>
           ) : (
             <div>
-              {favorites.map((id) => {
-                const post = postById.get(id);
+              {favorites.map((favoritePostId) => {
+                const post = postById.get(favoritePostId);
                 if (!post) return null;
                 return (
                   <PostCard
-                    key={id}
+                    key={favoritePostId}
                     post={post}
                     isFavorite={true}
                     toggleFavorites={toggleFavorites}

@@ -11,9 +11,9 @@ export default function DetailsPage({
   refetch,
 }) {
   const { id: routeId } = useParams();
-  const id = Number(routeId);
+  const PostId = Number(routeId);
 
-  const post = posts.find((post) => post.id === id);
+  const post = posts.find((post) => post.id === PostId);
 
   if (loading)
     return <h3 className="text-center text-[#6096ba] pt-10">Loading...</h3>;
