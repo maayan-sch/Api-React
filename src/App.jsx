@@ -134,7 +134,7 @@ export default function App() {
           </ul>
         </nav>
         {error ? (
-          <div className="text-center pt-10">
+          <div className="text-center pt-20">
             <h3 className="text-lg font-medium text-[#8b8c89] mb-3">
               Something went wrong
             </h3>

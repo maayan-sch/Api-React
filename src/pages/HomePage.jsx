@@ -1,5 +1,7 @@
 import PostCard from "../components/PostCard";
 
+const maxUserId = 10;
+
 export default function HomePage({
   favorites,
   toggleFavorites,
@@ -18,7 +20,7 @@ export default function HomePage({
           className="rounded-md px-4 py-2 bg-[#274c77] dark:bg-[#415a77] text-white focus:outline-none focus:border-[#a3cef1] dark:focus:border-[#778da9]"
         >
           <option>All Users</option>
-          {Array.from({ length: 10 }, (_, index) => index + 1).map(
+          {Array.from({ length: maxUserId }, (_, index) => index + 1).map(
             (userIdOption) => (
               <option key={userIdOption}>{userIdOption}</option>
             ),

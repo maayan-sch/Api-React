@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import loadPosts from "../services/loadingPosts";
 
 export default function useFetch(url) {
@@ -6,32 +6,38 @@ export default function useFetch(url) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  const cancelled = useRef(false);
+
   const fetchData = useCallback(async () => {
+    if (cancelled.current) return;
     setLoading(true);
     setError("");
 
     try {
       const response = await loadPosts(url);
+      if (cancelled.current) return;
       setData(response.data);
-    } catch {
-      setError("Could not load data right now.");
+    } catch (error) {
+      if (cancelled.current) return;
+      setError(error.message || "An unexpected error occurred.");
     } finally {
-      setLoading(false);
+      if (!cancelled.current) {
+        setLoading(false);
+      }
     }
   }, [url]);
 
   useEffect(() => {
-    let isActive = true;
+    cancelled.current = false;
 
     const runFetch = async () => {
-      if (!isActive) return;
       await fetchData();
     };
 
     runFetch();
 
     return () => {
-      isActive = false;
+      cancelled.current = true;
     };
   }, [fetchData]);
 

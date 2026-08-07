@@ -20,7 +20,7 @@ export default function PostCard({ post, toggleFavorites, isFavorite }) {
 
         <div className="mt-auto mb-6 text-center">
           <Link
-            to={`/Details/${post.id}`}
+            to={`/details/${post.id}`}
             className="font-medium text-[#6096ba] dark:text-[#778da9] hover:text-[#a3cef1] dark:hover:text-[#e0e1dd] transition"
           >
             View More Details
