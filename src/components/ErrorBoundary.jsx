@@ -10,10 +10,9 @@ export default class ErrorBoundary extends React.Component {
     return { hasError: true };
   }
 
-  componentDidCatch(error, errorInfo) {
-    reportError(error, errorInfo);
+  componentDidCatch(error) {
+    globalThis.reportError?.(error);
   }
-
   render() {
     if (this.state.hasError) {
       return this.props.fallback;

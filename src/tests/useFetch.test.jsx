@@ -1,7 +1,10 @@
+import "@testing-library/jest-dom/vitest";
 import { act, renderHook, waitFor } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import { render, screen } from "@testing-library/react";
 import useFetch from "../hooks/useFetch.jsx";
 import loadPosts from "../services/loadingPosts.jsx";
+import ErrorBoundary from "../components/ErrorBoundary";
 
 vi.mock("../services/loadingPosts.jsx", () => ({
   default: vi.fn(),
@@ -80,5 +83,25 @@ describe("useFetch", () => {
     expect(loadPosts).toHaveBeenCalledTimes(2);
     expect(result.current.data).toEqual([{ id: 2, title: "Retry success" }]);
     expect(result.current.error).toBe("");
+  });
+});
+
+function BuggyComponent() {
+  throw new Error("Test error");
+}
+
+describe("ErrorBoundary", () => {
+  it("displays fallback when a component throws", () => {
+    vi.spyOn(console, "error").mockImplementation(() => {});
+
+    render(
+      <ErrorBoundary fallback={<div>Something went wrong</div>}>
+        <BuggyComponent />
+      </ErrorBoundary>,
+    );
+
+    expect(screen.getByText("Something went wrong")).toBeInTheDocument();
+
+    vi.restoreAllMocks();
   });
 });
