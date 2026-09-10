@@ -1,271 +1,132 @@
 # React Posts App
 
-## 📌 Overview
-
-React Posts App is a responsive single-page application built with React and Vite that consumes data from the JSONPlaceholder API.
-
-The application allows users to browse posts, filter them by user ID, view detailed information, manage a persistent favorites list, and enjoy a modern user experience with loading skeletons, animations, and Dark Mode support.
-
----
+A responsive React application for browsing, filtering, viewing, and managing posts from the JSONPlaceholder API.
 
-## 🚀 Features
+## Demo
 
-- Fetch posts from the JSONPlaceholder API
-- Responsive card-based layout
-- Filter posts by User ID
-- View full details for every post
-- Add and remove favorites
-- Favorites persist using localStorage
-- Custom `useFetch` hook for data fetching
-- Skeleton loading screen while fetching data
-- Error handling with retry functionality
-- Empty states for missing data and favorites
-- Error Boundary for unexpected rendering errors
-- Page animations using Framer Motion
-- Light and Dark Mode support
-- Responsive design for desktop and mobile
+### Home Page
 
----
+![Home Page](screenshots/home.png)
 
-## 🛠️ Technologies Used
+### Favorites Page
 
-- React
-- Vite
-- React Router DOM
-- Axios
-- Tailwind CSS
-- Framer Motion
-- LocalStorage API
-- Vitest
-- React Testing Library
+![Favorites Page](screenshots/favorites.png)
 
----
+### Details Page
 
-## 📁 Project Structure
+![Details Page](screenshots/details.png)
 
-```text
-src/
-├── components/
-│   ├── ErrorBoundary.jsx
-│   └── PostCard.jsx
-├── hooks/
-│   └── useFetch.jsx
-├── pages/
-│   ├── HomePage.jsx
-│   ├── FavoritesPage.jsx
-│   └── DetailsPage.jsx
-├── services/
-│   └── loadingPosts.jsx
-├── tests/
-│   ├── favorites.test.jsx
-│   ├── filter.test.jsx
-│   └── useFetch.test.jsx
-├── utils/
-│   ├── favorites.jsx
-│   ├── filter.jsx
-│   └── ErrorMessage.jsx
-├── App.jsx
-└── main.jsx
-```
+## Features
 
----
+- Fetch and display posts from the JSONPlaceholder API
+- Filter posts by **User ID**
+- View detailed information for each post
+- Add and remove posts from **Favorites**
+- Persist Favorites using `localStorage`
+- Light and dark mode
+- Loading skeletons and empty states
+- User-friendly error messages and retry functionality
+- React Error Boundary for unexpected rendering errors
+- Responsive design and smooth UI animations
 
-## 🔄 Application Flow
+## Tech Stack
 
-1. The application fetches posts from:
+**React**, **Vite**, **React Router DOM**, **Axios**, **Tailwind CSS**, **Framer Motion**, **Vitest**, **React Testing Library**, **LocalStorage API**
 
-```
-https://jsonplaceholder.typicode.com/posts
-```
+## Architecture
 
-2. A custom `useFetch` hook manages:
+The application is divided into reusable components, pages, custom hooks, services, utilities, and tests.
 
-- Loading state
-- Error state
-- Retrieved data
-- Retry functionality
+The `pages` handle the main application views, while reusable UI elements are located in `components`. The custom `useFetch` hook manages API requests, loading states, errors, and retry functionality. API-related logic is separated into `services`, reusable functions are located in `utils`, and automated tests are organized in `tests`.
 
-3. Users can:
+## Getting Started
 
-- Browse all posts
-- Filter posts by User ID
-- View detailed information
-- Add or remove favorites
+### Prerequisites
 
-4. Favorite posts are stored in localStorage and automatically restored when the application reloads.
+- **Node.js 18+**
+- **npm**
 
----
-
-## 🔄 What changed and why
-
-1. Extracted the data fetching logic into a reusable `useFetch` hook to centralize `data`, `loading`, and `error` state management.
-
-2. Added retry functionality that allows repeating failed API requests without refreshing the entire page.
-
-3. Added an `ErrorBoundary` wrapper to catch unexpected rendering errors and display a fallback UI instead of crashing the application.
-
-4. Added Light/Dark Mode support using theme state, with a toggle button that switches themes without page refresh.
-
-5. Improved API error handling by adding centralized error messages based on the error type and HTTP status code.
-
-   - Added handling for:
-
-     - 404 (resource not found)
-     - 500 (server error)
-     - Network errors
-     - Request timeout errors
-
-6. Improved `useFetch` lifecycle handling by preventing state updates after component unmount using cancellation logic.
-
-7. Added unit tests for the `useFetch` hook using `renderHook` from React Testing Library.
-
-   Tested scenarios:
-
-   - Initial hook state
-   - Successful API request
-   - Failed API request
-   - Retry after a failed request
-
-8. Configured Vitest with `jsdom` environment to support React hook testing with DOM APIs.
-
----
-
-## ⭐ Favorites
-
-- Add or remove favorites with one click.
-- Favorites persist after refreshing the page.
-- Dedicated Favorites page.
-- Empty state displayed when no favorites exist.
-
----
-
-## 📄 Pages
-
-### 🏠 Home Page
-
-- Displays all posts
-- Filter posts by User ID
-- Responsive grid layout
-- Skeleton loading state
-- Error handling
-- Empty data handling
-
-### ❤️ Favorites Page
-
-- Displays saved favorite posts
-- Animated empty state
-- Remove favorites directly
-
-### 📖 Details Page
-
-- Displays complete post information
-- Shows Post ID and User ID
-- Add or remove favorites
-- Error and loading handling
-
----
-
-## ⚙️ Custom Hook
-
-### useFetch
-
-A reusable custom hook responsible for:
-
-- Fetching API data
-- Managing loading state
-- Managing error state
-- Providing a retry (`fetchData`) function
-- Preventing state updates after component unmount
-
----
-
-## 🛡️ Error Handling
-
-The project includes:
-
-- Error Boundary to catch unexpected rendering errors
-- API error handling with user-friendly messages
-- Retry button when data loading fails
-
-Additional improvements:
-
-- Centralized API error message handling.
-- Different error types are identified and converted into user-friendly messages.
-- Original errors are preserved while displaying readable messages to users.
-
----
-
-## 🎨 UI & UX
-
-The interface is built with Tailwind CSS and includes:
-
-- Responsive layout
-- Fixed navigation bar
-- Card-based design
-- Hover effects
-- Smooth transitions
-- Framer Motion animations
-- Skeleton loaders
-- Empty states
-- Light and Dark Mode
-
----
-
-## 🧪 Testing
-
-Unit tests are written using Vitest.
-
-React hooks are tested using `renderHook` from React Testing Library.
-
-The `useFetch` hook tests cover:
-
-- Initial state
-- Successful data loading
-- Failed requests
-- Retry functionality
-
-API calls are mocked to keep tests isolated and independent from external services.
-
-Run all tests:
+### Installation
 
 ```bash
-npx vitest
+git clone <your-repository-url>
+cd Api-React
+npm install
 ```
 
-Run once:
+### Running Tests
 
 ```bash
 npx vitest run
 ```
 
----
-
-## ▶️ Running the Project
-
-Install dependencies:
+To run tests in watch mode:
 
 ```bash
-npm install
+npx vitest
 ```
 
-Start the development server:
+### Running the Application
 
 ```bash
 npm run dev
 ```
 
----
+The application will be available at the local URL shown in the terminal.
 
-## 📸 Screenshots
+## API / Usage
 
-### Home Page
+The application fetches posts from the JSONPlaceholder `/posts` endpoint and displays them in a responsive card-based interface.
 
-![Home Page](./screenshots/home.png)
+Users can filter posts by **User ID**, open a post to view its details, and add posts to **Favorites**. Favorite posts are stored in `localStorage` and remain available after refreshing the page.
 
-### Favorites Page
+## Project Structure
 
-![Favorites Page](./screenshots/favorites.png)
+```text
+Api-React/
+│
+├── src/
+│   │
+│   ├── components/
+│   │   ├── ErrorBoundary.jsx
+│   │   └── PostCard.jsx
+│   │
+│   ├── hooks/
+│   │   └── useFetch.jsx
+│   │
+│   ├── pages/
+│   │   ├── HomePage.jsx
+│   │   ├── FavoritesPage.jsx
+│   │   └── DetailsPage.jsx
+│   │
+│   ├── services/
+│   │   └── loadingPosts.jsx
+│   │
+│   ├── tests/
+│   │   ├── favorites.test.jsx
+│   │   ├── filter.test.jsx
+│   │   └── useFetch.test.jsx
+│   │
+│   ├── utils/
+│   │   ├── favorites.jsx
+│   │   ├── filter.jsx
+│   │   └── ErrorMessage.jsx
+│   │
+│   ├── App.jsx
+│   └── main.jsx
+│
+├── screenshots/
+│   ├── home.png
+│   ├── favorites.png
+│   └── details.png
+│
+├── package.json
+├── vite.config.js
+└── README.md
+```
 
-### Details Page
+## What I Learned
 
-![Details Page](./screenshots/details.png)
+One of the main challenges was managing asynchronous API requests safely throughout the component lifecycle. I created a reusable `useFetch` hook to handle loading, error, data, retry, and request cancellation.
+
+I also practiced testing custom hooks and reusable functionality with **Vitest** and **React Testing Library**, while managing persistent client-side state with `localStorage`.
