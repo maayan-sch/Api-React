@@ -16,6 +16,10 @@ A responsive React application for browsing, filtering, viewing, and managing po
 
 ![Details Page](screenshots/details.png)
 
+### Home Page - Dark Mode
+
+![Home Page - Dark Mode](screenshots/homeDarkMode.png)
+
 ## Features
 
 - Fetch and display posts from the JSONPlaceholder API
@@ -49,7 +53,7 @@ The `pages` handle the main application views, while reusable UI elements are lo
 ### Installation
 
 ```bash
-git clone <your-repository-url>
+git clone https://github.com/maayan-sch/Api-React
 cd Api-React
 npm install
 ```
@@ -118,7 +122,8 @@ Api-React/
 ├── screenshots/
 │   ├── home.png
 │   ├── favorites.png
-│   └── details.png
+│   ├── details.png
+│   └── homeDarkMode.png
 │
 ├── package.json
 ├── vite.config.js
@@ -127,6 +132,6 @@ Api-React/
 
 ## What I Learned
 
-One of the main challenges was managing asynchronous API requests safely throughout the component lifecycle. I created a reusable `useFetch` hook to handle loading, error, data, retry, and request cancellation.
+I learned how to build a reusable `useFetch` hook for managing asynchronous API requests, including loading, error, retry, and request cancellation.
 
 I also practiced testing custom hooks and reusable functionality with **Vitest** and **React Testing Library**, while managing persistent client-side state with `localStorage`.
